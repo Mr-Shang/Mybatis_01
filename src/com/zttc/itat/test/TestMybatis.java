@@ -1,6 +1,7 @@
 package com.zttc.itat.test;
 
 import com.zttc.itat.dao.UserMapper;
+import com.zttc.itat.model.Class;
 import com.zttc.itat.model.User;
 import com.zttc.itat.util.MybatisSessionUtil;
 import org.apache.ibatis.session.SqlSession;
@@ -63,7 +64,7 @@ public class TestMybatis {
 
     @Test
     public void seleteAllUser(){
-        String statement="com.zttc.itat.model.UserMapper.selectAllUser";
+        String statement="com.zttc.itat.modelUserMapper.selectAllUser";
         SqlSession sqlSession=MybatisSessionUtil.getSession();
         List<User> list= sqlSession.selectList(statement);
         sqlSession.commit();
@@ -99,6 +100,20 @@ public class TestMybatis {
          List<User> user= (List<User>) userMapper.selectAllUser();
         sqlSession.close();
         System.out.println(user);
+    }
+    @Test
+    public void getClasses(){
+        SqlSession sqlSession=MybatisSessionUtil.getSession();
+        String statement="com.zttc.itat.model.ClassesMapper.getClass";
+        Class c=sqlSession.selectOne(statement,1);
+        System.out.println(c);
+
+    }
+    @Test
+    public void testOO2() {
+        SqlSession sqlSession = MybatisSessionUtil.getSession();
+        Class c = sqlSession.selectOne("com.zttc.itat.model.ClassesMapper.getClass2", 1);
+        System.out.println(c);
     }
 
 }

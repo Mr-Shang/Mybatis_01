@@ -1,4 +1,0 @@
-driver=com.mysql.jdbc.Driver
-        url = jdbc:mysql://localhost:3306/spring_teach
-        username = root
-        password = 105678
