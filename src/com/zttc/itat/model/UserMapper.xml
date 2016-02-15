@@ -25,8 +25,17 @@
     <select id="getUser" parameterType="com.zttc.itat.model.ConditionUser" resultType="com.zttc.itat.model.User">
         SELECT * FROM d_user WHERE  name
         <if test="name!='%null%'">
-            LIKE ${name} AND
+            LIKE #{name} AND
         </if>
-          age BETWEEN ${minAge} AND ${maxAge}
+          age BETWEEN #{minAge} AND #{maxAge}
     </select>
+
+    <!--调用存储过程，-->
+    <select id="getUserCount" parameterMap="getUserCountMap" statementType="CALLABLE">
+        CALL mybatis.ges_user_count(?, ?)
+    </select>
+    <parameterMap id="getUserCountMap" type="java.util.Map">
+        <parameter property="sex_id" mode="IN" jdbcType="INTEGER"/>
+        <parameter property="user_count" mode="OUT" jdbcType="INTEGER"/>
+    </parameterMap>
 </mapper>

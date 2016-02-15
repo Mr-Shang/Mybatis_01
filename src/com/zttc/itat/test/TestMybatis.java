@@ -11,7 +11,9 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Test;
 
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by �� on 2016/2/13.
@@ -140,8 +142,21 @@ public class TestMybatis {
         name=null;
         System.out.println(name+"……");
         ConditionUser conditionUser=new ConditionUser("'%"+name+"%'",13,20);
+//        ConditionUser conditionUser2=new ConditionUser(name,13,20);
         List<User> userList=sqlSession.selectList(statement, conditionUser);
         System.out.println(userList);
+        sqlSession.close();
+    }
+    @Test
+    public void getUserCount(){
+        SqlSession sqlSession=MybatisSessionUtil.getSession();
+        String statement="com.zttc.itat.model.UserMapper.getUserCount";
+        Map<String,Integer> map=new HashMap<String,Integer>();
+        map.put("sex_id",0);
+        map.put("user_count",0);
+        sqlSession.selectOne(statement,map);
+        Integer integer=map.get("user_count");
+        System.out.println(integer);
         sqlSession.close();
     }
 
