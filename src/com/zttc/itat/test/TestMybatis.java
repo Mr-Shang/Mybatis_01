@@ -2,6 +2,7 @@ package com.zttc.itat.test;
 
 import com.zttc.itat.dao.UserMapper;
 import com.zttc.itat.model.Class;
+import com.zttc.itat.model.ConditionUser;
 import com.zttc.itat.model.User;
 import com.zttc.itat.util.MybatisSessionUtil;
 import org.apache.ibatis.session.SqlSession;
@@ -129,6 +130,18 @@ public class TestMybatis {
         String statement="com.zttc.itat.model.ClassesMapper.getClass4";
         Class c=sqlSession.selectOne(statement,2);
         System.out.println(c);
+        sqlSession.close();
+    }
+    @Test
+    public void getUser(){
+        SqlSession sqlSession=MybatisSessionUtil.getSession();
+        String statement="com.zttc.itat.model.UserMapper.getUser";
+        String name="o";
+        name=null;
+        System.out.println(name+"……");
+        ConditionUser conditionUser=new ConditionUser("'%"+name+"%'",13,20);
+        List<User> userList=sqlSession.selectList(statement, conditionUser);
+        System.out.println(userList);
         sqlSession.close();
     }
 

@@ -21,4 +21,12 @@
     <select id="selectUser" parameterType="int" resultType="com.zttc.itat.model.User">
         select * from t_user where id = #{id}
     </select>
+
+    <select id="getUser" parameterType="com.zttc.itat.model.ConditionUser" resultType="com.zttc.itat.model.User">
+        SELECT * FROM d_user WHERE  name
+        <if test="name!='%null%'">
+            LIKE ${name} AND
+        </if>
+          age BETWEEN ${minAge} AND ${maxAge}
+    </select>
 </mapper>
