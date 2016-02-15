@@ -27,6 +27,8 @@
         </association>
     </resultMap>
 
+
+
     <!--
     方式二：嵌套查询：通过执行另外一个SQL映射语句来返回预期的复杂类型
         SELECT * FROM class WHERE c_id=1;
@@ -46,4 +48,51 @@
         <association property="teacher" column="teacher_id" select="getTeacher">
         </association>
     </resultMap>
+
+<!--一对多的连接查询-->
+    <select id="getClassStudent" parameterType="int" resultMap="getStudentMap">
+        select * from class c,student s where c.c_id=s.class_id and c.c_id=#{id}
+    </select>
+    <resultMap id="getStudentMap" type="com.zttc.itat.model.Class">
+        <id property="id" column="c_id"/>
+        <result property="name" column="c_name"/>
+        <collection property="student" ofType="com.zttc.itat.model.Student">
+            <id property="id" column="s_id"/>
+            <result property="name" column="s_name"/>
+        </collection>
+    </resultMap>
+
+    <!--一对多的嵌套查询-->
+    <!--<select id="getClassStudent2" parameterType="int" resultMap="getClassMap2">-->
+        <!--SELECT * FROM class WHERE c_id=${id}-->
+    <!--</select>-->
+    <!--<select id="getTeacher02" parameterType="int" resultType="com.zttc.itat.model.Teacher">-->
+        <!--SELECT t_id id, t_name name FROM teacher WHERE t_id=#{id}-->
+    <!--</select>-->
+    <!--<select id="getStudent"  parameterType="int" resultType="com.zttc.itat.model.Student">-->
+        <!--SELECT s_id id, s_name name FROM student WHERE class_id=#{id}-->
+    <!--</select>-->
+    <!--<resultMap id="getClassMap2" type="com.zttc.itat.model.Class">-->
+        <!--<id property="id" column="c_id"/>-->
+        <!--<result property="name" column="c_name"/>-->
+        <!--<association property="teacher"  column="teacher_id" select="getTeacher02" javaType="com.zttc.itat.model.Teacher"/>-->
+        <!--<collection property="student" select="getStudent" column="c_id"/>-->
+    <!--</resultMap>-->
+
+    <select id="getClass4" parameterType="int" resultMap="ClassResultMap4">
+        select * from class where c_id=#{id}
+    </select>
+    <resultMap type="com.zttc.itat.model.Class" id="ClassResultMap4">
+        <id property="id" column="c_id"/>
+        <result property="name" column="c_name"/>
+        <association property="teacher" column="teacher_id" javaType="com.zttc.itat.model.Teacher"
+                     select="getTeacher2"/>
+        <collection property="student" ofType="com.zttc.itat.model.Student" column="c_id" select="getStudent"/>
+    </resultMap>
+    <select id="getTeacher2" parameterType="int" resultType="com.zttc.itat.model.Teacher">
+        SELECT t_id id, t_name name FROM teacher WHERE t_id=#{id}
+    </select>
+    <select id="getStudent" parameterType="int" resultType="com.zttc.itat.model.Student">
+        SELECT s_id id, s_name name FROM student WHERE class_id=#{id}
+    </select>
 </mapper>

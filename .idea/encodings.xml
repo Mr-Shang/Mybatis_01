@@ -2,6 +2,7 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/src/com/zttc/itat/model/Class.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/zttc/itat/model/Student.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/zttc/itat/model/Teacher.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/zttc/itat/test/TestMybatis.java" charset="UTF-8" />
   </component>

@@ -115,5 +115,21 @@ public class TestMybatis {
         Class c = sqlSession.selectOne("com.zttc.itat.model.ClassesMapper.getClass2", 1);
         System.out.println(c);
     }
+    @Test
+    public void testOneToMany(){
+        SqlSession sqlSession=MybatisSessionUtil.getSession();
+        String statement="com.zttc.itat.model.ClassesMapper.getClassStudent";
+        Class c=sqlSession.selectOne(statement,2);
+        System.out.println(c);
+        sqlSession.close();
+    }
+    @Test
+    public void testOneToMany02(){
+        SqlSession sqlSession=MybatisSessionUtil.getSession();
+        String statement="com.zttc.itat.model.ClassesMapper.getClass4";
+        Class c=sqlSession.selectOne(statement,2);
+        System.out.println(c);
+        sqlSession.close();
+    }
 
 }

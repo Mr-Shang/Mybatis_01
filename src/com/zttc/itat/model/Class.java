@@ -1,5 +1,7 @@
 package com.zttc.itat.model;
 
+import java.util.List;
+
 /**
  * Created by �� on 2016/2/14.
  */
@@ -7,14 +9,16 @@ public class Class {
     private int id;
     private String name;
     private Teacher teacher;
+    private List<Student> student;
 
     public Class() {
     }
 
-    public Class(int id, String name, Teacher teacher) {
+    public Class(int id, String name, Teacher teacher, List<Student> student) {
         this.id = id;
         this.name = name;
         this.teacher = teacher;
+        this.student = student;
     }
 
     @Override
@@ -23,6 +27,7 @@ public class Class {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", teacher=" + teacher +
+                ", student=" + student +
                 '}';
     }
 
@@ -48,5 +53,13 @@ public class Class {
 
     public void setTeacher(Teacher teacher) {
         this.teacher = teacher;
+    }
+
+    public List<Student> getStudent() {
+        return student;
+    }
+
+    public void setStudent(List<Student> student) {
+        this.student = student;
     }
 }
